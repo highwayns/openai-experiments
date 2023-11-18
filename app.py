@@ -7,8 +7,11 @@ import cv2  # We're using OpenCV to read video
 import base64
 import time
 import io
-import openai
+from openai import OpenAI
 import os
+
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
 import requests
 
 import streamlit as st
@@ -55,12 +58,12 @@ def frames_to_story(base64Frames, prompt):
     params = {
         "model": "gpt-4-vision-preview",
         "messages": PROMPT_MESSAGES,
-        "api_key": os.environ["OPENAI_API_KEY"],
-        "headers": {"Openai-Version": "2020-11-07"},
+#        "api_key": os.environ["OPENAI_API_KEY"],
+#        "headers": {"Openai-Version": "2020-11-07"},
         "max_tokens": 500,
     }
 
-    result = openai.ChatCompletion.create(**params)
+    result = client.chat.completions.create(**params)
     print(result.choices[0].message.content)
     return result.choices[0].message.content
 

@@ -1,0 +1,7 @@
+openai
+python-dotenv==1.0.0
+IPython
+moviepy
+opencv-python
+streamlit
+numpy
